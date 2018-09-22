@@ -1,0 +1,184 @@
+﻿body {
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 18px;
+  color: whitesmoke;
+  background-color: whitesmoke;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 992px){
+  .agent-list > .panel.agent-item {
+    padding-right: 15px;
+  }
+}
+
+.navbar.administration {
+  height: 85px;
+  margin-bottom: 0;
+}
+  .navbar.administration .navbar-controls {
+    margin-top: 9px;
+  }
+    .navbar.administration .navbar-controls.title-tabs {
+      height: 20px;
+    }
+      .navbar.administration .navbar-controls.title-tabs .title-tab {
+        margin: -9px auto 0 auto;
+        cursor: pointer;
+        text-align: center;
+        float: left;
+        width: 100px;
+      }
+      .navbar.administration .navbar-controls.title-tabs .title-tab.active {
+        border-bottom: solid;
+      }
+
+.icon {
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+}
+
+.create-new-agent {
+  float: right;
+  color: #2196f3;
+  font-size: 14px;
+  margin: 30px 20px;
+  cursor: pointer;
+}
+  .create-new-agent .icon.create-new-agent-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url(/Content/images/add-user-icon-blue.svg);
+    margin: 0 10px -5px 0;
+  }
+
+.agent-list > .panel {
+  margin-bottom: 8px;
+  border-radius: 0px;
+  height: 67px;
+}
+  .agent-list > .panel > .panel-body {
+    height: 45px;
+    margin: 10px -1px 10px 10px;
+  }
+    .agent-list > .panel > .panel-body > .row {
+      margin-top: -4px;
+      color: #555;
+    }
+.agent-item .icon {
+  width: 20px;
+  height: 20px;
+  margin: 0px 15px -5px 0;
+}
+  .agent-item .icon.user-icon {
+    background-image: url(/Content/images/empty-user-icon-gray.svg);
+    width: 16px;
+    height: 16px;
+    margin: 0px 15px -2px 0;
+  }
+  .agent-item .icon.password-icon {
+    background-image: url(/Content/images/key-icon-gray.svg);
+  }
+  .agent-item .icon.time-icon {
+    background-image: url(/Content/images/clock-icon-gray.svg);
+  }
+.agent-item .last-seen-wrap {
+  margin-right: -15px;
+}
+.agent-item .last-seen-wrap .last-seen {
+  font-size: 14px;
+}
+.agent-item .last-seen-wrap .last-seen.empty {
+  color: lightgray;
+}
+
+.agent-item .agent-actions {
+  margin: -21px -30px 0px -15px;
+  background-color: #0097a7;
+  padding: 20px 13px;
+}
+  .agent-item .agent-actions.locked {
+    background-color: #b71c1c;
+  }
+  .agent-item .agent-actions .agent-action {
+    cursor: pointer;
+  }
+  .agent-item .agent-actions .icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 10px -4px 0;
+  }
+    .agent-item .agent-actions .icon.edit-agent-icon {
+      background-image: url(/Content/images/edit-icon-white.svg);
+    }
+  .agent-item .agent-actions.unlocked .icon.agent-lock-state-icon {
+    background-image: url(/Content/images/unlocked-icon-white.svg);
+  }
+  .agent-item .agent-actions.locked .icon.agent-lock-state-icon {
+    background-image: url(/Content/images/locked-icon-white.svg);
+  }
+  .agent-item .agent-actions .icon.remove-agent-icon {
+    background-image: url(/Content/images/bin-icon-white.svg);
+  }
+
+.agent-item .agent-edit {
+  display: none;
+}
+.agent-item.edit .agent-edit {
+  display: block;
+}
+.agent-item.edit .agent-view {
+  display: none;
+}
+.agent-edit .agent-text-editor-wrap {
+  overflow: hidden;
+}
+.agent-edit .agent-text-editor {
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  margin-left: 10px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #555;
+}
+  .agent-edit .agent-text-editor::placeholder,
+  .agent-edit .agent-text-editor::-webkit-input-placeholder,
+  .agent-edit .agent-text-editor::-moz-placeholder,
+  .agent-edit .agent-text-editor:-ms-input-placeholder,
+  .agent-edit .agent-text-editor:-moz-placeholder { 
+    color: lightgray;
+  }
+  .agent-edit .agent-text-editor:focus {
+    outline: none;
+  }
+.agent-edit .edit-button {
+  font-size: 14px;
+  cursor: pointer;
+}
+  .agent-edit .edit-button.save-edit {
+    color: cornflowerblue;
+  }
+    .agent-edit .edit-button.save-edit.disabled {
+      color: lightgray;
+      cursor: default;
+    }
+  .agent-edit .edit-button.cancel-edit {
+    color: #b71c1c;
+  }
+.agent-edit .icon {
+  float: left;
+  margin-right: 5px;
+  margin-top: 6px;
+}
+  .agent-edit .icon.user-icon {
+    margin-top: 6px;
+    margin-right: 5px;
+  }
+
+.new-agent-item {
+  display: none;
+}

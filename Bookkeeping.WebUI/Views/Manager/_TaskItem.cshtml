@@ -1,0 +1,48 @@
+﻿@using Bookkeeping.Data.Models;
+
+@model ManagerTask
+
+<div class="panel task-item panel-default">
+    <div class="panel-body">
+        <input class="id hidden" value="@Model.Id">
+        <input class="purpose hidden" value="@Model.PurposeOfPayment">
+        @{
+            var markerClass = "";
+            switch (Model.Status)
+            {
+                case TaskType.Red:
+                    markerClass = "marker-red";
+                    break;
+                case TaskType.Green:
+                    markerClass = "marker-green";
+                    break;
+                case TaskType.Yellow:
+                    markerClass = "marker-yellow";
+                    break;
+            }
+            if (!string.IsNullOrEmpty(markerClass))
+            {
+                <div class="marker @(markerClass)"></div>
+            }
+        }
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 ellipsed-column">
+                <span class="inn">@Model.Inn</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 name-col ellipsed-column">
+                <span class="name @(string.IsNullOrEmpty(Model.Name) ? "not-found" : "")">@(string.IsNullOrEmpty(Model.Name) ? "Не найдено в справочнике Т1000" : Model.Name)</span>@*TODO: move to constants*@
+            </div>
+            <div class="col-lg-2 col-md-2 hidden-sm hidden-xs ellipsed-column">
+                <span class="date">@Model.Date.ToString("dd.MM.yyyy HH:mm")</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 ellipsed-column">
+                <span class="result pull-right">
+                    <span class="user-icon" data-decisions-json="@Model.DecisionsJson"></span>
+                    @Model.Decisions.Count(p => p.Decision.HasValue)&nbsp;/&nbsp;@Model.TotalCount
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+

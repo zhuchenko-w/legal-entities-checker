@@ -1,0 +1,21 @@
+﻿@using Bookkeeping.Data.Models
+
+@model IList<Agent>
+    
+@foreach (var item in Model)
+{
+    Html.RenderPartial("_AgentItem", item);
+}
+
+<div class="panel panel-default no-agents-wrap @(Model.Any() ? "hidden" : "")">
+    <div class="panel-body">
+        <div class="row no-agents">
+            <span class="inn">Агентов не найдено</span>
+        </div>
+    </div>
+</div>
+
+<div class="new-agent-item">
+    @{Html.RenderPartial("_AgentItem", new Agent());}
+</div>
+

@@ -1,0 +1,31 @@
+﻿@using Bookkeeping.Data.Models;
+
+@model IList<AgentTask>
+
+@*todo: simplify model, remove unused properties*@
+
+@foreach (var task in Model)
+{
+    <div class="panel panel-default mobile-task-item" data-location="@Url.Action("Resolution", "Agent", new { taskId = task.Id, isDone = task.Decision.HasValue })">
+        <div class="row task-info">
+            <div class="task-main-info col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div class="row task-date">
+                    @task.Date.ToString("dd.MM.yyyy HH:mm")
+                </div>
+                <div class="row task-inn">
+                    @task.Inn
+                </div>
+            </div>
+            <div class="task-decision row col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                @if (task.Decision.HasValue)
+                {
+                    <div class="task-decision-icon">
+                        <span class="glyphicon @(task.Decision.Value ? "decision-ok glyphicon-ok" : "decision-deny glyphicon-remove-circle")"></span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+

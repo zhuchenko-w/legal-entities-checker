@@ -1,0 +1,60 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model List<ResolutionViewModel>
+
+@foreach (var resolution in Model)
+{
+    <hr />
+    <div class="row">
+        <span class="username">
+            <span class="glyphicon glyphicon-user user-icon">&nbsp;</span>
+            @resolution.Agent.Code&nbsp;
+        </span>
+        @if (resolution.Decision.HasValue)
+        {
+            <span class="resolution">
+                Резолюция&nbsp;@(resolution.DateResolution.HasValue ? $"({resolution.DateResolution.Value.ToString("dd.MM.yyyy")})" : ""):&nbsp;
+                <span class="glyphicon @(resolution.Decision.Value ? "glyphicon-ok resolution-ok" : "glyphicon-remove-sign resolution-fail")"></span>
+            </span>
+            
+            if (string.IsNullOrEmpty(resolution.Note))
+            {
+                <div class="row no-comment"><span>Примечания нет</span></div>
+            }
+            else
+            {
+                <div class="row has-comment"><span class="little-label">Примечание</span><span class="comment">@resolution.Note</span></div>
+            }
+
+            if (!string.IsNullOrEmpty(resolution.PurposeOfPaymentComment))
+            {
+                <div class="row has-comment"><span class="little-label">Комментарий к назначению</span><span class="comment">@resolution.PurposeOfPaymentComment</span></div>
+            }
+
+            if (string.IsNullOrEmpty(resolution.ImageData))
+            {
+                <div class="row no-image"><span>Фотографий не прикреплено</span></div>
+            }
+            else
+            {
+                var imgSrc = $"data:{resolution.MimeType};base64,{resolution.ImageData}";
+
+                <div class="row resolution-image-wrap">
+                    <span class="little-label">Прикрепленное изображение</span>
+                    <div class="resolution-image">
+                        <img class="image" src="@imgSrc" data-name="@resolution.ImageName" data-mime-type="@resolution.MimeType" />
+                        <div class="download-resolution-image-icon">
+                            <img src="~/Content/images/download-icon-white.svg" />
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="row status-wait"><span>Ожидает исполнения...</span></div>
+        }
+    </div>
+}
+
+

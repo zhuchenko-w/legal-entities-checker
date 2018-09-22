@@ -1,0 +1,14 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model TextInputViewModel
+
+<form>
+    <div class="form-group material-form-group">
+        <label for="@Model.Id">
+            <span class="full-label-text @(Model.IsRequired ? "required" : "")">@Model.FullLabelText</span>
+            <span class="short-label-text @(Model.IsRequired ? "required" : "")">@Model.ShortLabelText</span>
+        </label>
+        <textarea rows="1" class="form-control material-form-control  @(string.IsNullOrEmpty(Model.InputFieldClassString) ? "" : Model.InputFieldClassString)" name="@Model.Id" id="@Model.Id" @(Model.MaxLength > 0 ? $"maxlength={Model.MaxLength}" : "")>@Model.Value</textarea>
+    </div>
+</form>
+

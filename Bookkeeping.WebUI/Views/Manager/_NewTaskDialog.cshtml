@@ -1,0 +1,60 @@
+﻿@using Bookkeeping.WebUi.Models
+@using Bookkeeping.Data.Models
+
+@model IList<Agent>
+
+<div class="new-task-dialog">
+    <div class="new-task-dialog-content">
+        <div class="row new-task-dialog-content-title">
+            <div class="col-xs-11">
+                <span>Новая проверка ИНН</span>
+            </div>
+            <div class="col-xs-1">
+                <span class="glyphicon glyphicon-remove close-new-task-dialog-icon"></span>
+            </div>
+        </div>
+        <div class="row new-task-dialog-content-body">
+            <div class="new-task-card-inn-wrap">
+                @{
+                    Html.RenderPartial("_SearchInputMaterial", new TextInputViewModel
+                    {
+                        FullLabelText = "Укажите ИНН",
+                        ShortLabelText = "ИНН",
+                        Id = "new-task-card-inn",
+                        InputFieldClassString = "integer-input",
+                        IsRequired = true,
+                        MaxLength = 12
+                    });
+                }
+                <div class="new-task-card-name"></div>
+            </div>
+            <div class="new-task-card-purpose-wrap">
+                @{
+                    Html.RenderPartial("_TextAreaMaterial", new TextInputViewModel
+                    {
+                        Id = "new-task-card-purpose",
+                        FullLabelText = "Введите назначение",
+                        ShortLabelText = "Назначение платежа",
+                        IsRequired = false
+                    });
+                }
+            </div>
+            <div class="new-task-card-agents-wrap">
+                @{
+                    Html.RenderPartial("_CheckboxDropdownMaterial", new CheckboxDropdownViewModel
+                    {
+                        Id = "new-task-card-agents",
+                        AllText = "Все агенты",
+                        NoneText = "Назначьте агентов",
+                        ShortLabelText = "Aгенты",
+                        IsRequired = true,
+                        Items = Model.Select(p => new KeyValuePair<int, string>(p.Id, p.Code)).ToList()
+                    });
+                }
+            </div>
+        </div>
+        <div class="row new-task-dialog-content-footer">
+            <button class="btn btn-create-new-task" disabled="disabled">В РАБОТУ</button>
+        </div>
+    </div>
+</div>

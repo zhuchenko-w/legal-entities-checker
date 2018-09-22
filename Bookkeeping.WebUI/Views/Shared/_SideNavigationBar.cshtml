@@ -1,0 +1,9 @@
+﻿@using Bookkeeping.WebUi.Models
+
+<div id="mainSidenav" class="sidenav">
+    <a href="@Url.Action("Tasks", "Manager", new TaskFilter { IsArchive = false } )">Задания на проверку ЮЛ</a>
+    <hr />
+    <a href="@Url.Action("Tasks", "Manager", new TaskFilter { IsArchive = true } )">Архив заданий</a>
+    <hr />
+    <a href="@Url.Action("Agents", "Administration")">Управление</a>
+</div>

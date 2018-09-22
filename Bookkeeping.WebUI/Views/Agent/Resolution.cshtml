@@ -1,0 +1,101 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model AgentResolutionViewModel
+
+@{
+    ViewBag.Title = "Резолюция";
+    Layout = "~/Views/Shared/_LayoutAgent.cshtml";
+}
+
+<div class="resolution-content">
+    @using (Html.BeginForm("SaveResolution", "Agent", FormMethod.Post, new { id = "resolutionForm" }))
+    {
+        @Html.HiddenFor(p => p.TaskId)
+        @Html.HiddenFor(p => p.Id)
+        @Html.HiddenFor(p => p.ImageData)
+        @Html.HiddenFor(p => p.MimeType)
+        @Html.HiddenFor(p => p.ImageName)
+        @Html.HiddenFor(p => p.PurposeOfPayment)
+        <div class="resolution-content-inner">
+            <div class="row resolution-header @(Model.Decision.HasValue ? (Model.Decision.Value ? "green" : "red") : "")">
+                <div class="back-btn" data-location="@Url.Action("Tasks", "Agent")">
+                    <span class="glyphicon glyphicon-arrow-left back-icon"></span>
+                </div>
+                <span class="title-text">@Model.Inn</span>
+            </div>
+            <div class="row resolution-body">
+                <div class="row resolution-image-upload-wrap">
+                    <input class="hidden" type="file" id="image"/>
+                    <div class="resolution-image">
+                        <div class="preview" @Html.Raw(string.IsNullOrEmpty(Model.ImageData) ? "style='display: none;'" : "")>
+                            <img class="image" src="@(string.IsNullOrEmpty(Model.ImageData) ? "" : $"data:{Model.MimeType};base64,{Model.ImageData}")" />
+                            <div class="remove-image-icon">
+                                <img src="~/Content/images/x-icon-white.svg" />
+                            </div>
+                        </div>
+                        <div class="row resolution-image-upload-icon" @Html.Raw(string.IsNullOrEmpty(Model.ImageData) ? "" : "style='display: none;'")>
+                            <img src="~/Content/images/upload-icon-white.svg" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row resolution-info">
+                    <div class="row resolution-buttons">
+                        @Html.HiddenFor(p => p.Decision)
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 resolution-btn-wrap resolution-btn-ok-wrap">
+                            <div class="row resolution-btn resolution-ok-btn @(Model.Decision.HasValue && !Model.Decision.Value ? "gray" : "")">
+                                <span class="glyphicon glyphicon-ok resolution-btn-icon"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 resolution-btn-wrap resolution-btn-deny-wrap">
+                            <div class="row resolution-btn resolution-deny-btn @(Model.Decision.HasValue && Model.Decision.Value ? "gray" : "")">
+                                <span class="glyphicon glyphicon-remove-circle resolution-btn-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                        Html.RenderPartial("_TextAreaMaterial", new TextInputViewModel {
+                            Id = "Note",
+                            Value = Model.Note,
+                            FullLabelText = "Примечание",
+                            ShortLabelText = "Примечание",
+                            IsRequired = false
+                        });
+                    }
+
+                    @if(!string.IsNullOrEmpty(Model.PurposeOfPayment))
+                    {
+                        <div class="purpose-of-payment-comment">
+                            <div class="purpose-of-payment">
+                                <div class="purpose-of-payment-title">Необходимо проверить назначение платежа!</div>
+                                <div class="purpose-of-payment-text">@Model.PurposeOfPayment</div>
+                            </div>
+                        </div>
+
+                        Html.RenderPartial("_TextAreaMaterial", new TextInputViewModel {
+                            Id = "PurposeOfPaymentComment",
+                            Value = Model.PurposeOfPaymentComment,
+                            FullLabelText = "Комментарий к назначению",
+                            ShortLabelText = "Комментарий к назначению",
+                            IsRequired = true
+                        });
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row resolution-footer">
+    <div class="row save-btn @(Model.Decision.HasValue ? "" : "gray")">
+        <span class="save-btn-text">СОХРАНИТЬ</span>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var saveResolutionUrl = '@Url.Action("SaveResolution", "Agent")';
+    </script>
+    @Scripts.Render("~/bundles/agent-resolution")
+}

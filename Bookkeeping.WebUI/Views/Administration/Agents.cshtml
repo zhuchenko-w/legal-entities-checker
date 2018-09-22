@@ -1,0 +1,71 @@
+﻿@using Bookkeeping.WebUi.Models
+@using Bookkeeping.Common
+
+@model AgentsViewModel
+
+@{
+    ViewBag.Title = "Управление: Агенты";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/administration")
+}
+
+<nav class="navbar administration navbar-inverse">
+    <div class="navbar-controls row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 navbar-menu">
+            <span class="glyphicon glyphicon-menu-hamburger open-menu-icon"></span>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 navbar-title text-center">
+            <div>
+                Управление
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 navbar-account">
+            <span class="glyphicon glyphicon-log-in log-out-icon"></span>
+        </div>
+    </div>
+    <div class="navbar-controls title-tabs row container">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <div class="title-tab active">АГЕНТЫ</div>
+        </div>
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+    </div>
+</nav>
+
+<div class="container body-content">
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 task-list">
+            <div class="create-new-agent">
+                <span class="icon create-new-agent-icon"></span>НОВЫЙ АГЕНТ
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 agent-list">
+            @{Html.RenderPartial("_AgentList", Model.Agents);}
+        </div>
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+    </div>
+
+    @{Html.RenderPartial("_SideNavigationBar");}
+</div>
+
+@section scripts {
+    <script>
+        var createAgentUrl = '@Url.Action("CreateAgent", "Administration")';
+        var removeAgentUrl = '@Url.Action("RemoveAgent", "Administration")';
+        var editAgentUrl = '@Url.Action("EditAgent", "Administration")';
+        var setAgentLockStateUrl = '@Url.Action("SetAgentLockState", "Administration")';
+        var minPasswordLength = @Constants.MinPasswordLength;
+
+        @Html.Raw(string.IsNullOrEmpty(Model.AgentsError) ? "" : $"onError('{Model.AgentsError}');")
+    </script>
+    @Scripts.Render("~/bundles/administration-agents")
+}
+

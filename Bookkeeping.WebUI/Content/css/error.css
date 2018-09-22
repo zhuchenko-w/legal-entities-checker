@@ -1,0 +1,40 @@
+﻿html {
+  background-color: whitesmoke;
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.login-form {
+  float: none;
+  margin: 0 auto;
+  min-width: 250px;
+}
+
+.field-validation-error {
+  color: red;
+}
+
+.validation-summary-errors {
+  color: red;
+}
+
+  .validation-summary-errors ul {
+    list-style-type: none;
+    padding-left: 0;
+  }

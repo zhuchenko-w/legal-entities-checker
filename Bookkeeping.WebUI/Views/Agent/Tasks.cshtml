@@ -1,0 +1,61 @@
+﻿@using Bookkeeping.WebUi.Models
+@using Bookkeeping.Data.Models
+
+@model AgentTasksViewModel
+
+@{
+    ViewBag.Title = "Задачи";
+    Layout = "~/Views/Shared/_LayoutAgent.cshtml";
+}
+
+<nav class="navbar navbar-inverse mobile">
+    <div class="navbar-controls mobile row">
+        <div class="navbar-title mobile text-center">
+            <div class="row title-tabs">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-tab in-work @(Model.IsDone ? "" : "active")"><a href="#">В работу&nbsp;<span class="numberCircle @(@Model.InWorkCount == 0 ? "empty" : "")">@Model.InWorkCount</span></a></div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 title-tab is-done @(Model.IsDone ? "active" : "")"><a href="#">Готово&nbsp;<span class="numberCircle @(@Model.DoneCount == 0 ? "empty" : "")">@Model.DoneCount</span></a></div>
+            </div>
+        </div>
+        <div class="navbar-account mobile">
+            <span class="glyphicon glyphicon-log-in log-out-icon"></span>
+        </div>
+    </div>
+</nav>
+
+<div class="row mobile-task-list-wrap">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 task-list mobile">
+        @{Html.RenderPartial("_TaskList", Model.Tasks);}
+    </div>
+</div>
+
+<div class="no-tasks-wrap" style="display: @(Model.Tasks.Any() ? "none" : "table")">
+    <div class="no-tasks">
+        <div class="row no-tasks-inner">
+            <div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="no-done-tasks" style="display: @(Model.IsDone ? "block" : "none")">
+                    <span class="no-tasks-text">Нет выполненных заданий</span>
+                </div>
+                <div class="no-new-tasks" style="display: @(Model.Tasks.Any() ? "none" : "block")">
+                    <span class="no-tasks-text">Новых заданий нет</span>
+                    <button class="btn no-tasks-btn no-new-tasks-btn">ОБНОВИТЬ</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 hidden-sm hidden-xs"></div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        var getTasksUrl = '@Url.Action("GetTasks", "Agent")';
+        var saveResolutionUrl = '@Url.Action("SaveResolution", "Agent")';
+        var pageSize = @Model.PageSize;
+
+        @Html.Raw(string.IsNullOrEmpty(Model.ResolutionError) ? "" : $"onError('{Model.ResolutionError}');")
+        @Html.Raw(string.IsNullOrEmpty(Model.TasksError) ? "" : $"onError('{Model.TasksError}');")
+    </script>
+    @Scripts.Render("~/bundles/agent-tasks")
+}

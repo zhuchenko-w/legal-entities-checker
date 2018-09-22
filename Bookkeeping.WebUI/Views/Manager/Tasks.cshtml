@@ -1,0 +1,165 @@
+﻿@using Bookkeeping.WebUi.Models
+@using Bookkeeping.Common
+
+@model ManagerTasksViewModel
+
+@{
+    ViewBag.Title = Model.IsArchived ? "Архив" : "Задания на проверку ЮЛ";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/manager")
+}
+
+@section contextMenu {
+    <ul class="dropdown-menu task-context-menu" role="menu">
+        <li>
+            <a class="task-context-menu-item task-context-menu-item-archivate" tabindex="-1" href="#">
+                <span class="glyphicon glyphicon-save-file task-context-menu-item-icon"></span>
+                В архив
+            </a>
+        </li>
+        <li>
+            <a class="task-context-menu-item task-context-menu-item-repeat" tabindex="-1" href="#">
+                <span class="glyphicon glyphicon glyphicon-repeat task-context-menu-item-icon"></span>
+                Повтор
+            </a>
+        </li>
+        <li>
+            <a class="task-context-menu-item task-context-menu-item-remove" tabindex="-1" href="#">
+                <span class="glyphicon glyphicon-trash task-context-menu-item-icon"></span>
+                Удалить
+            </a>
+        </li>
+    </ul>
+}
+
+<nav class="navbar navbar-inverse">
+    <div class="navbar-controls row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 navbar-menu">
+            <span class="glyphicon glyphicon-menu-hamburger open-menu-icon"></span>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 navbar-title text-center">
+            <div>
+                @ViewBag.Title
+                @if (!Model.IsArchived)
+                {
+                    <button class="btn btn-add-task">СОЗДАТЬ</button>
+                }
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 navbar-account">
+            <span class="glyphicon glyphicon-log-in log-out-icon"></span>
+        </div>
+    </div>
+</nav>
+
+<div class="container body-content">
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <div class="labeled-dropdown-group">
+                <label class="labeled-dropdown-label">Статус</label>
+                <div class="dropdown labeled-dropdown">
+                    <button class="btn btn-default dropdown-toggle labeled-dropdown-toggle" type="button" id="status-dropdown-menu-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Все задания
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu labeled-dropdown-menu" id="status-dropdown-menu" aria-labelledby="status-dropdown-menu-toggle">
+                        <li class="selected"><a href="#" data-value="0">Все задания</a></li>
+                        <li><a href="#" data-value="2">Зелёные</a></li>
+                        <li><a href="#" data-value="3">Желтые</a></li>
+                        <li><a href="#" data-value="4">Красные</a></li>
+                        <li><a href="#" data-value="1">Без статуса</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+            @{
+                Html.RenderPartial("_CheckboxDropdownMaterial", new CheckboxDropdownViewModel
+                {
+                    Id = "agents",
+                    AllText = "Все агенты",
+                    NoneText = "Все агенты",
+                    ShortLabelText = "Агенты",
+                    AlwaysSet = true,
+                    Items = Model.Agents.Select(p => new KeyValuePair<int, string>(p.Id, p.Code)).ToList()
+                });
+            }
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            @{
+                Html.RenderPartial("_SearchInputMaterial", new TextInputViewModel
+                {
+                    FullLabelText = "Поиск по ИНН",
+                    ShortLabelText = "ИНН",
+                    Id = "inn",
+                    InputFieldClassString = "integer-input",
+                    MaxLength = 12
+                });
+            }
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
+            @{
+                Html.RenderPartial("_SearchInputMaterial", new TextInputViewModel
+                {
+                    FullLabelText = "Поиск по названию",
+                    ShortLabelText = "Название",
+                    Id = "name"
+                });
+            }
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-6">
+            @{
+                Html.RenderPartial("_SearchInputMaterial", new TextInputViewModel
+                {
+                    FullLabelText = "Поиск по назначению",
+                    ShortLabelText = "Назначение",
+                    Id = "purpose"
+                });
+            }
+        </div>
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 task-list">
+            @{Html.RenderPartial("_TaskList");}
+        </div>
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
+    </div>
+
+    @{Html.RenderPartial("_TaskCard");}
+    @{Html.RenderPartial("_SideNavigationBar");}
+</div>
+
+@{Html.RenderPartial("_NewTaskDialog", Model.Agents);}
+
+@section scripts {
+    <script>
+        var getResolutionsUrl = '@Url.Action("GetResolutions", "Manager")';
+        var getTasksUrl = '@Url.Action("GetTasks", "Manager")';
+        var createTaskUrl = '@Url.Action("CreateTask", "Manager")';
+        var removeTaskUrl = '@Url.Action("RemoveTask", "Manager")';
+        var moveTaskToArchiveUrl = '@Url.Action("MoveTaskToArchive", "Manager")';
+        var repeatTaskUrl = '@Url.Action("RepeatTask", "Manager")';
+        var searchNameByInnUrl = '@Url.Action("SearchNameByInn", "Manager")';
+        var isArchive = @Model.IsArchived.ToString().ToLower();
+        var pageSize = @Model.PageSize;
+        var innLengthIndividual = @Constants.InnLengthIndividual;
+        var innLengthLegal = @Constants.InnLengthLegal;
+
+        @Html.Raw(string.IsNullOrEmpty(Model.TasksError) ? "" : $"onError('{Model.TasksError}');")
+    </script>
+    @Scripts.Render("~/bundles/manager-tasks")
+}
+

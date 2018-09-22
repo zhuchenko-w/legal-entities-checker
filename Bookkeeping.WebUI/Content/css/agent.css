@@ -1,0 +1,399 @@
+﻿html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 18px;
+  color: whitesmoke;
+  background-color: whitesmoke;
+  letter-spacing: 0.5px;
+  overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+}
+
+/*tasks*/
+.mobile-wrap {
+  overflow-x: hidden;
+}
+
+.navbar.mobile {
+  height: 48px;
+  margin-bottom: 3px;
+  background-color: #0097a7;
+  text-align: center;
+  line-height: 48px;
+}
+  .navbar.mobile a {
+    color: whitesmoke;
+  }
+  .navbar.mobile a:hover {
+    text-decoration: none;
+  }
+  .navbar.mobile a:focus {
+    text-decoration: none;
+  }
+
+.navbar .navbar-controls.mobile {
+  margin: 0 auto 0 auto;
+  height: 100%;
+}
+
+.navbar-account.mobile {
+  float: right;
+  width: 40px;
+  height: 100%;
+  margin: 0 auto;
+}
+  .navbar-account.mobile .log-out-icon {
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 11px;
+  }
+
+.numberCircle {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  background-color: #64b5f6;
+  color: white;
+  text-align: center;
+  font: 15px Arial, sans-serif;
+  display: inline-block;
+  cursor: inherit;
+}
+  .numberCircle.empty {
+    background-color: transparent;
+    color: transparent;
+    cursor: default;
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+.navbar-title.mobile {
+  width: calc(100% - 40px);
+  height: 100%;
+  float: left;
+  margin: 0 auto;
+}
+  .navbar-title.mobile .row.title-tabs {
+    margin: 0 auto;
+  }
+    .navbar-title.mobile .row.title-tabs .title-tab {
+      margin: 0 auto;
+      cursor: pointer;
+    }
+      .navbar-title.mobile .row.title-tabs .title-tab.active {
+        margin-top: -2px;
+        border-bottom: solid;
+      }
+
+.mobile-task-list-wrap {
+  margin: 0 -10px 0 -10px;
+}
+
+.task-list.mobile {
+  height: 80px;
+}
+  .task-list.mobile > .mobile-task-item {
+    height: 80px;
+    margin-bottom: 3px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    cursor: pointer;
+  }
+    .task-list.mobile > .mobile-task-item .task-info {
+      margin: 12px auto 0 auto;
+      color: #555;
+    }
+    .task-list.mobile > .mobile-task-item .task-main-info {
+    }
+      .task-list.mobile > .mobile-task-item .task-main-info .task-date {
+        margin: 0 auto;
+        font-size: 12px;
+      }
+      .task-list.mobile > .mobile-task-item .task-main-info .task-inn {
+        margin: 7px auto 0 auto;
+        font-size: 25px;
+      }
+      .task-list.mobile > .mobile-task-item .task-main-info .task-decision {
+        margin: 0 auto;
+        float: right;
+        height: 100%;
+        width: 40px;
+      }
+    .task-list.mobile > .mobile-task-item .task-decision {
+      margin: 0 auto;
+      margin: 17px auto 0 auto;
+    }
+      .task-list.mobile > .mobile-task-item .task-decision .task-decision-icon {
+        float: right;
+        margin-right: 10px;
+      }
+        .task-list.mobile > .mobile-task-item .task-decision .task-decision-icon .decision-ok {
+          color: #0097a7
+        }
+        .task-list.mobile > .mobile-task-item .task-decision .task-decision-icon .decision-deny {
+          color: #b71c1c
+        }
+
+/*tasks-end*/
+
+/*resolution*/
+.resolution-content {
+  min-height: 100%;
+  background-color: white;
+}
+  .resolution-content .resolution-content-inner {
+    padding-bottom: 60px;
+  }
+  .resolution-content .resolution-header {
+    height: 50px;
+    background-color: #757575;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+  }
+    .resolution-content .resolution-header.gray {
+      background-color: lightgray;
+    }
+    .resolution-content .resolution-header.green {
+      background-color: #0097a7;
+    }
+    .resolution-content .resolution-header.red {
+      background-color: #b71c1c;
+    }
+    .resolution-content .resolution-header .title-text {
+      top: 12px;
+      position: relative;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .resolution-content .resolution-header .back-btn {
+      position: absolute;
+      width: 40px;
+      height: 50px;
+      cursor: pointer;
+    }
+      .resolution-content .resolution-header .back-btn .back-icon {
+        top: 14px;
+        font-size: 15px;
+        font-weight: bold;
+      }
+  .resolution-content .resolution-body {
+    margin: 0 auto;
+    width: 100%;
+    min-height: 400px;
+  }
+    .resolution-content .resolution-body .resolution-image-upload-wrap {
+      margin: 0 auto;
+      width: 100%;
+      height: 200px;
+      cursor: pointer;
+    }
+      .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image {
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+      }
+        .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image .preview {
+          margin: 0 auto;
+          width: auto;
+          max-height: 100%;
+          display: table;
+          position: relative;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+          .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image .preview img.image {
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 200px;
+            display: block;
+            transform: translateY(0%);
+            padding: 5px;
+            cursor: pointer;
+          }
+          .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image .preview .remove-image-icon {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            width: 25px;
+            height: 25px;
+            background-color: #000000;
+            opacity: 0.8;
+            cursor: pointer;
+          }
+            .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image .preview .remove-image-icon img {
+              width: 15px;
+              height: 15px;
+              position: relative;
+              top: 50%;
+              transform: translateY(-50%);
+              display: block;
+              margin: 0 auto;
+            }
+      .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image-upload-icon {
+        top: 50px;
+        position: relative;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        margin: 0 auto;
+        align-items: center;
+        background-color: #e0e0e0;
+        border-radius: 50px;
+        color: #fff;
+      }
+        .resolution-content .resolution-body .resolution-image-upload-wrap .resolution-image-upload-icon img {
+          top: 30px;
+          position: relative;
+          height: 35px;
+          width: 35px;
+        }
+    .resolution-content .resolution-body .resolution-buttons {
+      margin: 10px 10px;
+      padding: 20px 0;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+      color: white;
+    }
+      .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap {
+        padding: 0 5px;
+      }
+        .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap.resolution-btn-ok-wrap {
+          padding-left: 0;
+        }
+        .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap.resolution-btn-deny-wrap {
+          padding-right: 0;
+        }
+        .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn {
+          margin: 0 auto;
+          width: 100%;
+          height: 60px;
+          cursor: pointer;
+        }
+          .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn.resolution-ok-btn {
+            background-color: #0097a7;
+          }
+            .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn.resolution-ok-btn.gray {
+              background-color: lightgray;
+            }
+          .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn.resolution-deny-btn {
+            background-color: #b71c1c;
+          }
+            .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn.resolution-deny-btn.gray {
+              background-color: lightgray;
+            }
+          .resolution-content .resolution-body .resolution-buttons .resolution-btn-wrap .resolution-btn .resolution-btn-icon {
+            margin: 0 auto;
+            margin-top: 20px;
+            font-size: 20px;
+          }
+    .resolution-content .resolution-body .resolution-info {
+      margin: 0 10px;
+    }
+      .resolution-content .resolution-body .resolution-info .resolution-comment {
+        margin: 0 auto;
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+        .resolution-content .resolution-body .resolution-info .resolution-comment .resolution-comment-input {
+          margin: 0 auto;
+          box-shadow: none;
+          border-radius: 0;
+          border-left: 0;
+          border-right: 0;
+          border-top: 0;
+          background-color: transparent;
+          font-size: 18px;
+        }
+          .resolution-content .resolution-body .resolution-info .resolution-comment .resolution-comment-input:focus {
+            box-shadow: none;
+            border-bottom: 2px solid rgb(0, 131, 143);
+          }
+      .resolution-content .resolution-body .resolution-info .purpose-of-payment-comment {
+        margin: 0 auto;
+        border-top: 1px solid #e0e0e0;
+        padding: 12px 0 0 0;
+      }
+        .resolution-content .resolution-body .resolution-info .purpose-of-payment-comment .purpose-of-payment {
+          margin: 20px auto;
+          color: #555;
+          background-color: lightgray;
+          box-shadow: 0px 1px 6px 0px grey;
+          height: fit-content;
+        }
+          .resolution-content .resolution-body .resolution-info .purpose-of-payment-comment .purpose-of-payment .purpose-of-payment-title {
+            font-size: 14px;
+            padding: 7px 5px;
+          }
+          .resolution-content .resolution-body .resolution-info .purpose-of-payment-comment .purpose-of-payment .purpose-of-payment-text {
+            font-size: 18px;
+            padding: 10px 5px 10px 5px;
+            word-wrap: break-word;
+          }
+
+.resolution-footer {
+  width: 100%;
+  height: 60px;
+  margin: -60px auto 0 auto;
+}
+  .resolution-footer .save-btn {
+    width: 100%;
+    height: 100%;
+    background-color: #0e47a1;
+    color: whitesmoke;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+    .resolution-footer .save-btn .save-btn-text {
+      bottom: -20px;
+      position: relative;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: inherit;
+    }
+    .resolution-footer .save-btn.gray {
+      cursor: default;
+      background-color: lightgray;
+    }
+
+.no-tasks-wrap {
+  display: table;
+  position: relative;
+  height: calc(100% - 135px);
+  width: 100%;
+  margin: 0 auto;
+}
+  .no-tasks-wrap .no-tasks {
+    display: table-cell;
+    vertical-align: middle;
+  }
+    .no-tasks-wrap .no-tasks .no-tasks-inner {
+      margin: -55px auto 0 auto;
+      text-align: center;
+    }
+      .no-tasks-wrap .no-tasks .no-tasks-inner .no-tasks-text {
+        display: block;
+        color: #555;
+      }
+      .no-tasks-wrap .no-tasks .no-tasks-inner .no-tasks-btn {
+        color: whitesmoke;
+        background-color: #2196f3;
+        border-radius: 2px;
+        margin-top: 30px;
+      }
+/*resolution-end*/
+
+/*mobile-end*/

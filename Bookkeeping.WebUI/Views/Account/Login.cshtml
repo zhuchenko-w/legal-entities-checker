@@ -1,0 +1,45 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Вход";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/login")
+}
+
+<div class="content">
+    <div class="login-form">
+        <div class="login-form-content">
+            <div class="row login-form-content-title">
+                <div class="col-xs-11">
+                    <span class="login-form-title">Войти в систему</span>
+                </div>
+            </div>
+            <div class="row login-form-content-body">
+                <div class="row">
+                    <span class="login-form-label" for="username">Логин</span>
+                    <div class="login-form-username">
+                        <input class="login-form-input" id="username" type="text" placeholder="Укажите логин" autofocus/>
+                    </div>
+                    <span class="login-form-label login-form-label-password" for="password">Пароль</span>
+                    <div class="login-form-password">
+                        <input class="login-form-input" id="password" type="password" placeholder="Укажите пароль" />
+                    </div>
+                </div>
+            </div>
+            <div class="row login-form-content-footer">
+                <button class="btn btn-login login-disabled">ВОЙТИ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var loginUrl = '@Url.Action("Login", "Account")';
+        var returnUrl = '@Html.Raw(Model)';
+    </script>
+    @Scripts.Render("~/bundles/login")
+}

@@ -1,0 +1,18 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model ManagerTasksViewModel
+
+@foreach (var task in Model.Tasks)
+{
+    Html.RenderPartial("_TaskItem", task);
+}
+
+<div class="panel panel-default no-tasks @(Model.Tasks.Any() ? "hidden" : "")">
+    <div class="panel-body">
+        <div class="row">
+            <span class="inn">Заданий не найдено</span>
+        </div>
+    </div>
+</div>
+
+

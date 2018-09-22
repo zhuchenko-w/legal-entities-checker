@@ -1,0 +1,18 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model TextInputViewModel
+
+<form>
+    <div class="form-group search-form-group">
+        <label for="@Model.Id">
+            <span class="full-label-text @(Model.IsRequired ? "required" : "")">@Model.FullLabelText</span>
+            <span class="short-label-text @(Model.IsRequired ? "required" : "")">@Model.ShortLabelText</span>
+        </label>
+        <div class="right-inner-addon">
+            <i class="glyphicon glyphicon-search search-icon"></i>
+            <i class="glyphicon glyphicon-remove clear-search-icon"></i>
+            <input type="search" class="form-control search-form-control @(string.IsNullOrEmpty(Model.InputFieldClassString) ? "" : Model.InputFieldClassString)" name="@Model.Id" id="@Model.Id" value="@Model.Value" autocomplete="off" @(Model.MaxLength > 0 ? $"maxlength={Model.MaxLength}" : "") />
+        </div>
+    </div>
+</form>
+

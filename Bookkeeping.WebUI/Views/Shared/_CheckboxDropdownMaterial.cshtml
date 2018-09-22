@@ -1,0 +1,27 @@
+﻿@using Bookkeeping.WebUi.Models;
+
+@model CheckboxDropdownViewModel
+
+<div class="labeled-dropdown-group @(Model.AlwaysSet ? "always-set" : "unset")">
+    <label class="labeled-dropdown-label @(Model.IsRequired ? "required" : "")">@Model.ShortLabelText</label>
+    <div class="dropdown labeled-dropdown">
+        <button class="btn btn-default dropdown-toggle labeled-dropdown-toggle @(Model.IsRequired && !Model.AlwaysSet ? "required" : "")" id="@Model.Id-toggle" data-all-text="@Model.AllText" data-none-text="@Model.NoneText" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @Model.NoneText
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-checkbox-menu labeled-dropdown-menu" id="@Model.Id" aria-labelledby="@Model.Id-toggle">
+            @foreach (var item in Model.Items)
+            {
+                <li>
+                    <div class="label-check">
+                        <div class="checkbox">
+                            <input type="checkbox" name="@item.Key" id="@item.Key">
+                            <label for="@item.Key">@item.Value</label>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
