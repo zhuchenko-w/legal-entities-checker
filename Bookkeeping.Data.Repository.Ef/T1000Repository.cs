@@ -24,7 +24,7 @@ namespace Bookkeeping.Data.Repository.Ef
         {
             using (var db = new T1000Context())
             {
-                await db.Database.ExecuteSqlCommandAsync($"SELECT FROM armulcheck.sp_logout('{dbsid}')");
+                await db.Database.ExecuteSqlCommandAsync($"SELECT armulcheck.sp_logout('{dbsid}')");
             }
         }
 
